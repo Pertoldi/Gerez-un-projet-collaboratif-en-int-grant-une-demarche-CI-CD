@@ -68,7 +68,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
-            -Dsonar.organization=Pertoldi
+            -Dsonar.organization=pertoldi
             -Dsonar.projectBaseDir=front/
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
