@@ -27,10 +27,10 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
+            -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD-front
             -Dsonar.organization=pertoldi
             -Dsonar.projectBaseDir=front/
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
           
