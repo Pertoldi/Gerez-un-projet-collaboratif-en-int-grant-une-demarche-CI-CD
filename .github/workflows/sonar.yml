@@ -6,9 +6,14 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
+  backend-analysis:
     name: Build and analyze
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./back
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,5 +43,32 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        working-directory: back
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
+
+
+  frontend-analysis:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    defaults:
+      run:
+        working-directory: ./front
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          
+      - name: Analyze on SonarCloud
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
+            -Dsonar.organization=pertoldi
+            -Dsonar.projectBaseDir=front/
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

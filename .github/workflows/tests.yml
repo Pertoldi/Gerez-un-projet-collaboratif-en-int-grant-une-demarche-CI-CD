@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [16.x]
     defaults:
       run:
         working-directory: ./front
@@ -52,10 +52,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm i -g @angular/cli@14
-      - run: npm run build
-      - run: ng test --browsers ChromeHeadless --watch=false --code-coverage
+      - run: |
+          npm ci
+          npm i -g @angular/cli@14
+          npm run build
+          ng test --browsers ChromeHeadless --watch=false --code-coverage
 
       - name: Upload karma coverage report artifact
         uses: actions/upload-artifact@v4
