@@ -58,7 +58,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push frontend Docker image
-        run: |
-          docker build -t bobapp-frontend .
-          docker push ${{ secrets.DOCKER_USERNAME }}/bobapp-frontend:latest
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./front
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/bobapp-frontend:latest
