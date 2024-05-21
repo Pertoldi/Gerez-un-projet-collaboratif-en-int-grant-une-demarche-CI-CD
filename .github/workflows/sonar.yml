@@ -44,8 +44,8 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bobapp-back
 
 
   frontend-analysis:
@@ -69,7 +69,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.projectKey=Pertoldi_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD-front
+            -Dsonar.projectKey=bobapp-front
             -Dsonar.organization=pertoldi
             -Dsonar.projectBaseDir=front/
         env:
