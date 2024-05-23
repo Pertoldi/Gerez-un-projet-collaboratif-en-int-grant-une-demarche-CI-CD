@@ -52,10 +52,6 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20]
-
     defaults:
       run:
         working-directory: ./front
